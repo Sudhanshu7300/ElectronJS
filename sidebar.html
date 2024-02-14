@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My App</title>
+    <!-- Add any necessary stylesheets and scripts here -->
+    <style>
+      /* Define your styles for the layout here */
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .navbar {
+        background-color: #333;
+        color: #fff;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+      }
+
+      .sidebar {
+        background-color: #eee;
+        width: 200px;
+        height: 100%;
+        flex: 0 0 auto;
+        overflow: auto;
+      }
+
+      .content {
+        flex: 1 1 auto;
+        padding: 10px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Define your layout structure here -->
+    <div class="navbar">
+      <h1>My App</h1>
+      <button>Logout</button>
+    </div>
+    <div class="wrapper">
+      <div class="sidebar">
+        <!-- Add your sidebar content here -->
+        <ul>
+          <li><a href="#" id="page1">Page 1</a></li>
+          <li><a href="#" id="page2">Page 2</a></li>
+          <li><a href="#">Menu Item 3</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <!-- Add your main content here -->
+        <h2>Welcome to My App</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+          risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
+          ultricies sed, dolor.
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const { ipcRenderer } = require("electron");
+
+    // Send a message to the main process to open the specified page
+    function openPage(page) {
+      ipcRenderer.send("open-page", page);
+    }
+
+    // Add event listeners to the menu items to trigger the openPage function
+    document.getElementById("page1").addEventListener("click", () => {
+      openPage("page1.html");
+    });
+
+    document.getElementById("page2").addEventListener("click", () => {
+      openPage("page2.html");
+    });
+  </script>
+</html>
